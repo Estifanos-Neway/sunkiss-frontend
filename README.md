@@ -1,5 +1,5 @@
 # sunkiss
 
-Suggests good movies you would love.
+## Sunkiss suggestions
 
     under development

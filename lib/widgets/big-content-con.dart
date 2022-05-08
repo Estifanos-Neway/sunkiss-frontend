@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:palette_generator/palette_generator.dart';
-import 'package:sunkiss/models/movie.dart';
+import 'package:sunkiss/models/content.dart';
 import 'package:sunkiss/commons/variables.dart';
+import 'package:sunkiss/widgets/reactionBar.dart';
 
-class BigMovieCon extends StatefulWidget {
-  final Movie movie;
-  const BigMovieCon({Key? key, required Movie this.movie}) : super(key: key);
+class BigContentCon extends StatefulWidget {
+  final Content content;
+  const BigContentCon({Key? key, required Content this.content})
+      : super(key: key);
 
   @override
-  State<BigMovieCon> createState() => _BigMovieConState();
+  State<BigContentCon> createState() => _BigContentConState();
 }
 
-class _BigMovieConState extends State<BigMovieCon> {
+class _BigContentConState extends State<BigContentCon> {
   List<Color> _gradientColors = local_defaultGradientColors;
 
   @override
   initState() {
     super.initState();
     PaletteGenerator.fromImageProvider(
-      AssetImage(widget.movie.thumbnailUrl),
+      AssetImage(widget.content.thumbnailUrl),
     ).then((paletteGenerator) {
       setState(() {
         _gradientColors = [
@@ -49,7 +51,7 @@ class _BigMovieConState extends State<BigMovieCon> {
           ClipRRect(
             borderRadius: BorderRadius.circular(7),
             child: Image.asset(
-              widget.movie.thumbnailUrl,
+              widget.content.thumbnailUrl,
               width: 80,
               height: 140,
               fit: BoxFit.cover,
@@ -62,7 +64,7 @@ class _BigMovieConState extends State<BigMovieCon> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.movie.title,
+                    widget.content.title,
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -74,7 +76,7 @@ class _BigMovieConState extends State<BigMovieCon> {
                   ),
                   Expanded(
                     child: Text(
-                      widget.movie.summary,
+                      widget.content.summary,
                       style: TextStyle(
                         fontSize: 12,
                         color: local_colors["onSurface"],
@@ -87,39 +89,45 @@ class _BigMovieConState extends State<BigMovieCon> {
                     thickness: 1,
                     endIndent: 40,
                   ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.star_border,
-                        color: local_colors["onSurface"],
-                        size: 18,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.star_border,
-                        color: local_colors["onSurface"],
-                        size: 18,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.star_border,
-                        color: local_colors["onSurface"],
-                        size: 18,
-                      ),
-                      Expanded(
-                        child: Row(),
-                      ),
-                      Icon(
-                        Icons.bookmark_border_outlined,
-                        color: local_colors["onSurface"],
-                        size: 18,
-                      )
-                    ],
-                  )
+                  ReactionBar(
+                    rate: widget.content.rate,
+                    saved: widget.content.saved,
+                  ),
+                  // Row(
+                  //   children: [
+                  //     Icon(
+                  //       Icons.star_border,
+                  //       color: local_colors["onSurface"],
+                  //       size: 18,
+                  //     ),
+                  //     const SizedBox(
+                  //       width: 5,
+                  //     ),
+                  //     Icon(
+                  //       Icons.star_border,
+                  //       color: local_colors["onSurface"],
+                  //       size: 18,
+                  //     ),
+                  //     const SizedBox(
+                  //       width: 5,
+                  //     ),
+                  //     Icon(
+                  //       Icons.star_border,
+                  //       color: local_colors["onSurface"],
+                  //       size: 18,
+                  //     ),
+                  //     Expanded(
+                  //       child: Row(),
+                  //     ),
+                  //     Icon(
+                  //       widget.content.saved
+                  //         ? Icons.bookmark
+                  //         : Icons.bookmark_border_outlined,
+                  //       color: local_colors["onSurface"],
+                  //       size: 18,
+                  //     )
+                  //   ],
+                  // )
                 ],
               ),
             ),

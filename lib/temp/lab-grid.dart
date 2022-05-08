@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List topics = <Widget>[
     TopicCon(
-      imageProvider: AssetImage("movie.jpg"),
+      imageProvider: AssetImage("content.jpg"),
     ),
     TopicCon(
       imageProvider: AssetImage("blog.jpg"),
@@ -42,22 +42,22 @@ class _MyHomePageState extends State<MyHomePage> {
       imageProvider: AssetImage("blog.jpg"),
     ),
     TopicCon(
-      imageProvider: AssetImage("movie.jpg"),
+      imageProvider: AssetImage("content.jpg"),
     ),
     TopicCon(
-      imageProvider: AssetImage("movie.jpg"),
-    ),
-    TopicCon(
-      imageProvider: AssetImage("blog.jpg"),
+      imageProvider: AssetImage("content.jpg"),
     ),
     TopicCon(
       imageProvider: AssetImage("blog.jpg"),
     ),
     TopicCon(
-      imageProvider: AssetImage("movie.jpg"),
+      imageProvider: AssetImage("blog.jpg"),
     ),
     TopicCon(
-      imageProvider: AssetImage("movie.jpg"),
+      imageProvider: AssetImage("content.jpg"),
+    ),
+    TopicCon(
+      imageProvider: AssetImage("content.jpg"),
     ),
   ];
   @override
@@ -134,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: "search"),
-            BottomNavigationBarItem(icon: Icon(Icons.favorite), label:"liked"),
+            BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "liked"),
           ],
           currentIndex: _selectedItem,
           onTap: (int index) {
@@ -147,6 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
 class TopicCon extends StatelessWidget {
   ImageProvider imageProvider;
   IconData iconData;
@@ -165,8 +166,7 @@ class TopicCon extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Container(
-                ),
+            child: Container(),
           ),
           Container(
             constraints: BoxConstraints.expand(height: 50),

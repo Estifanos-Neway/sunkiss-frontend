@@ -1,15 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sunkiss/commons/variables.dart';
-import 'package:sunkiss/models/movie.dart';
-import 'package:sunkiss/widgets/big-movie-con.dart';
+import 'package:sunkiss/models/content.dart';
+import 'package:sunkiss/widgets/big-content-con.dart';
 
 class TodaysSuggestion extends StatefulWidget {
-  final List<BigMovieCon> todaysSuggestionConList;
+  final List<BigContentCon> todaysSuggestionConList;
   final CarouselController _carouselController = CarouselController();
-  TodaysSuggestion({Key? key, required List<Movie> todaysSuggestionList})
+  TodaysSuggestion({Key? key, required List<Content> todaysSuggestionList})
       : todaysSuggestionConList = todaysSuggestionList.map((todaysSuggestion) {
-          return BigMovieCon(movie: todaysSuggestion);
+          return BigContentCon(content: todaysSuggestion);
         }).toList(),
         super(key: key);
   @override
