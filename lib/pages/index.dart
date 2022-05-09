@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sunkiss/commons/variables.dart';
 import 'package:sunkiss/pages/home.dart';
+import 'package:sunkiss/pages/profile.dart';
 import 'package:sunkiss/pages/saved.dart';
 import 'package:sunkiss/pages/search.dart';
 import 'package:sunkiss/pages/settings.dart';
+import 'package:sunkiss/widgets/custom-app-bar.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -37,7 +39,6 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
         currentIndex = _tabController.index;
       });
     }
-    ;
   }
 
   @override
@@ -48,36 +49,38 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
       return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
-          child: Container(
-            decoration: BoxDecoration(
-              color: local_colors["bars"],
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 216, 216, 216),
-                  offset: Offset.fromDirection(1),
-                  blurRadius: 1,
-                  spreadRadius: 1,
+        appBar: CustomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, "/about");
+                },
+                child: Text(
+                  local_platformDisplayName,
+                  style: TextStyle(
+                      color: local_colors["onBackground"],
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
                 ),
-              ],
-            ),
-            padding: const EdgeInsets.fromLTRB(20, 8, 25, 8),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    local_platformDisplayName,
-                    style: TextStyle(
-                        color: local_colors["onBackground"],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    "/profile",
+                  );
+                },
+                child: CircleAvatar(
+                  backgroundColor: local_colors["onBackground"],
+                  foregroundImage: const AssetImage(
+                    "assets/images/dog.jpg",
                   ),
-                  const CircleAvatar(
-                    foregroundImage: AssetImage("assets/images/dog.jpg"),
-                    radius: 10,
-                  )
-                ]),
+                  radius: 10,
+                ),
+              )
+            ],
           ),
         ),
         body: ScrollConfiguration(
