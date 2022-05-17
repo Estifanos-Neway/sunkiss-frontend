@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:Sunkiss/commons/variables.dart';
 import 'package:Sunkiss/models/content.dart';
-import 'package:Sunkiss/widgets/reactionBar.dart';
+import 'package:Sunkiss/widgets/reaction-bar.dart';
 
 class SmallContentCon extends StatefulWidget {
   final int ref;
   final Content content;
   SmallContentCon({Key? key, required this.content})
-      : ref=content.id, super(key: key);
+      : ref = content.id,
+        super(key: key);
   @override
   State<SmallContentCon> createState() => _SmallContentConState();
 }
@@ -66,14 +67,16 @@ class _SmallContentConState extends State<SmallContentCon> {
                   widget.content.title,
                   style: TextStyle(
                     fontSize: 18,
-                    color: local_colors["onSurface"],
+                    color: local_colors["whiteText"],
                   ),
                 ),
               ),
               Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(bottom: 5),
+                    margin: const EdgeInsets.only(
+                      bottom: 5,
+                    ),
                     decoration: BoxDecoration(
                       color: local_colors["primary"],
                     ),

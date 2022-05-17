@@ -1,4 +1,6 @@
 import 'package:Sunkiss/states/app-state.dart';
+import 'package:Sunkiss/widgets/custom-app-bar.dart';
+import 'package:Sunkiss/widgets/custom-scrollable.dart';
 import 'package:flutter/material.dart';
 import 'package:Sunkiss/commons/variables.dart';
 import 'package:Sunkiss/pages/sections/todays-suggestions.dart';
@@ -17,23 +19,30 @@ class Home extends StatelessWidget {
       contents[2],
     ];
     int rowSize = (MediaQuery.of(context).size.width / 192).floor();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        TodaysSuggestion(todaysSuggestionList: todaysSuggestionList),
-        Text(
-          "Enhance your suggestions",
-          style: TextStyle(
-            fontSize: 20,
-            color: local_colors["onBackground"],
+    return CustomScrollable(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomAppBar(
+            where: "Home",
           ),
-        ),
-        ContentList(
-          contentsList:
-              AppStateController.of(context).blocProvider.contentBloc.contents,
-          rowSize: rowSize,
-        ),
-      ],
+          TodaysSuggestion(todaysSuggestionList: todaysSuggestionList),
+          Text(
+            "Enhance your suggestions",
+            style: TextStyle(
+              fontSize: 20,
+              color: local_colors["onBackground"],
+            ),
+          ),
+          ContentList(
+            contentsList: AppStateController.of(context)
+                .blocProvider
+                .contentBloc
+                .contents,
+            rowSize: rowSize,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:Sunkiss/pages/home.dart';
 import 'package:Sunkiss/pages/saved.dart';
 import 'package:Sunkiss/pages/search.dart';
 import 'package:Sunkiss/pages/account.dart';
-import 'package:Sunkiss/widgets/custom-app-bar.dart';
+// import 'package:Sunkiss/widgets/custom-app-bar.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
   int currentIndex = 0;
   List<Widget> indexBodyWidgets = [
     Home(),
-    Saved(),
+    const Saved(),
     const Search(),
     const Account(),
   ];
@@ -45,93 +45,43 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
     print(
       "Screen Size: ${MediaQuery.of(context).size.width} x ${MediaQuery.of(context).size.height}",
     );
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints viewportConstraints) {
-      return Scaffold(
-        appBar: CustomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, "/about");
-                },
-                child: Text(
-                  local_platformDisplayName,
-                  style: TextStyle(
-                      color: local_colors["onBackground"],
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    "/profile",
-                  );
-                },
-                child: CircleAvatar(
-                  backgroundColor: local_colors["onBackground"],
-                  foregroundImage: const AssetImage(
-                    "assets/images/dog.jpg",
-                  ),
-                  radius: 15,
-                ),
-              )
-            ],
-          ),
+    return Scaffold(
+      
+      body: Container(
+        color: local_colors["background"],
+        child: indexBodyWidgets[currentIndex],
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: local_colors["surface"],
         ),
-        body: ScrollConfiguration(
-          behavior: ScrollConfiguration.of(context).copyWith(
-            scrollbars: false,
+        child: TabBar(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 7,
           ),
-          child: SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: viewportConstraints.minHeight,
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: local_colors["background"],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: indexBodyWidgets[currentIndex],
-                ),
-              ),
+          controller: _tabController,
+          unselectedLabelColor: local_colors["onSurface"],
+          labelColor: local_colors["onSurface"],
+          indicatorColor: local_colors["primary"],
+          indicatorSize: TabBarIndicatorSize.label,
+          tabs: const [
+            Icon(
+              Icons.home_filled,
             ),
-          ),
+            Icon(
+              Icons.bookmark,
+            ),
+            Icon(
+              Icons.search_outlined,
+              size: 28,
+            ),
+            Icon(
+              Icons.person,
+            ),
+          ],
         ),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: local_colors["bars"],
-          ),
-          child: TabBar(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-            controller: _tabController,
-            unselectedLabelColor: local_colors["onBackground"],
-            labelColor: local_colors["onBackground"],
-            indicatorColor: local_colors["primary"],
-            indicatorSize: TabBarIndicatorSize.label,
-            tabs: const [
-              Icon(
-                Icons.home_filled,
-              ),
-              Icon(
-                Icons.bookmark,
-              ),
-              Icon(
-                Icons.search_outlined,
-                size: 28,
-              ),
-              Icon(
-                Icons.person,
-              ),
-            ],
-          ),
-        ),
-      );
-    });
+      ),
+    );
   }
 }

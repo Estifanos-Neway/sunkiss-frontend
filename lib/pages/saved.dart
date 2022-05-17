@@ -1,5 +1,7 @@
 import 'package:Sunkiss/models/content.dart';
 import 'package:Sunkiss/states/app-state.dart';
+import 'package:Sunkiss/widgets/custom-app-bar.dart';
+import 'package:Sunkiss/widgets/custom-scrollable.dart';
 import 'package:flutter/material.dart';
 import 'package:Sunkiss/commons/variables.dart';
 import 'package:Sunkiss/widgets/content-list.dart';
@@ -18,21 +20,29 @@ class Saved extends StatelessWidget {
       }
     }
     int rowSize = (MediaQuery.of(context).size.width / 162).floor();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          "Your saved contents",
-          style: TextStyle(
-            fontSize: 20,
-            color: local_colors["onBackground"],
+    return CustomScrollable(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomAppBar(
+            where: "Saved",
           ),
-        ),
-        ContentList(
-          contentsList: savedContentsList,
-          rowSize: rowSize,
-        ),
-      ],
+          Text(
+            "Here are your saved movies",
+            style: TextStyle(
+              fontSize: 20,
+              color: local_colors["onBackground"],
+            ),
+          ),
+          const SizedBox(
+            height: 7,
+          ),
+          ContentList(
+            contentsList: savedContentsList,
+            rowSize: rowSize,
+          ),
+        ],
+      ),
     );
   }
 }

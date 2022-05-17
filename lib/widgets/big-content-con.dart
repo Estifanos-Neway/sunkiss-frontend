@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:Sunkiss/models/content.dart';
 import 'package:Sunkiss/commons/variables.dart';
-import 'package:Sunkiss/widgets/reactionBar.dart';
+import 'package:Sunkiss/widgets/reaction-bar.dart';
 
 class BigContentCon extends StatefulWidget {
   final int ref;
@@ -61,7 +61,12 @@ class _BigContentConState extends State<BigContentCon> {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(10, 2, 0, 2),
+              padding: EdgeInsets.fromLTRB(
+                10,
+                2,
+                0,
+                2,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -70,7 +75,7 @@ class _BigContentConState extends State<BigContentCon> {
                     style: TextStyle(
                       fontSize: 21.5,
                       fontWeight: FontWeight.bold,
-                      color: local_colors["onSurface"],
+                      color: local_colors["whiteText"],
                     ),
                   ),
                   SizedBox(
@@ -81,7 +86,7 @@ class _BigContentConState extends State<BigContentCon> {
                       widget.content.summary,
                       style: TextStyle(
                         fontSize: 16,
-                        color: local_colors["onSurface"],
+                        color: local_colors["whiteText"],
                       ),
                       softWrap: true,
                     ),

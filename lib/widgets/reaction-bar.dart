@@ -33,7 +33,7 @@ class ReactionBar extends StatelessWidget {
                     onTap: handleRating,
                     child: Icon(
                       index < rate ? Icons.star : Icons.star_border,
-                      color: local_colors["onSurface"],
+                      color: local_colors["whiteText"],
                       size: 23.5,
                     ),
                   );
@@ -47,7 +47,7 @@ class ReactionBar extends StatelessWidget {
           onTap: handleSave,
           child: Icon(
             saved ? Icons.bookmark : Icons.bookmark_border_outlined,
-            color: local_colors["onSurface"],
+            color: local_colors["whiteText"],
             size: 23.5,
           ),
         ),

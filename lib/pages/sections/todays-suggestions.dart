@@ -24,7 +24,7 @@ class _TodaysSuggestionState extends State<TodaysSuggestion> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Today's Suggestions",
+          "What about you watch these today?",
           style: TextStyle(
             fontSize: 20,
             color: local_colors["onBackground"],

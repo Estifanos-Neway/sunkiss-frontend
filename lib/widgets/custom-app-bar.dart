@@ -1,69 +1,116 @@
+
 import 'package:flutter/material.dart';
 import 'package:Sunkiss/commons/variables.dart';
+import 'package:Sunkiss/commons/functions.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSize {
-  int nonUsableWidth = 55;
-  @override
-  Size get preferredSize => Size.fromHeight(60);
-  @override
-  final Widget child;
-  CustomAppBar({Key? key, this.child = const SizedBox()}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    double topPadding = 12 + MediaQuery.of(context).viewPadding.top;
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints viewportConstraints) =>
-          PreferredSize(
-        preferredSize: preferredSize,
-        child: Container(
-          decoration: BoxDecoration(
-            color: local_colors["bars"],
-            boxShadow: [
-              BoxShadow(
-                color: const Color.fromARGB(255, 216, 216, 216),
-                offset: Offset.fromDirection(1),
-                blurRadius: 1,
-                spreadRadius: 1,
-              ),
-            ],
+class CustomAppBar extends StatelessWidget {
+  final String where;
+  late Widget headerContent;
+  CustomAppBar({Key? key, this.where = ""}) : super(key: key) {
+    switch (where.toLowerCase()) {
+      case "home":
+        headerContent = Padding(
+          padding: const EdgeInsets.only(
+            top: 10,
+            bottom: 10,
           ),
-          padding: EdgeInsets.fromLTRB(10, topPadding, 25, 12),
           child: Row(
             children: [
-              Container(
-                margin: const EdgeInsets.only(
-                  right: 10,
+              CircleAvatar(
+                foregroundImage: const AssetImage(
+                  "assets/images/dog.jpg",
                 ),
-                child: Navigator.canPop(context)
-                    ? GestureDetector(
-                        onTap: () {
-                          Navigator.pop(
-                            context,
-                          );
-                        },
-                        child: Icon(
-                          Icons.arrow_back_rounded,
-                          color: local_colors["onBackground"],
-                          size: 20,
-                        ),
-                      )
-                    : const SizedBox(
-                        width: 10,
-                      ),
+                backgroundColor: local_colors["surface"],
+                radius: 15,
               ),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: viewportConstraints.minWidth -
-                      (Navigator.canPop(context)
-                          ? nonUsableWidth + 10
-                          : nonUsableWidth),
-                ),
-                child: child,
+              const SizedBox(
+                width: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Hey there,",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: local_colors["onBackground"],
+                    ),
+                  ),
+                  Text(
+                    "Good ${getGreetingTime()}",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: local_colors["onBackground"],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-        ),
+        );
+        break;
+      case "saved":
+      case "search":
+        headerContent = Row(
+          children: [
+            Text(
+              where,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: local_colors["onBackground"],
+              ),
+            ),
+          ],
+        );
+        break;
+      case "account":
+        headerContent = Row(
+          children: [
+            CircleAvatar(
+              foregroundImage: const AssetImage(
+                "assets/images/dog.jpg",
+              ),
+              backgroundColor: local_colors["surface"],
+              radius: 15,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              "Adam Smith",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: local_colors["onBackground"],
+              ),
+            ),
+          ],
+        );
+        break;
+      default:
+        headerContent = Row(
+          children: [
+            Text(
+              where,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ],
+        );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(
+        20,
+        MediaQuery.of(context).viewPadding.top + 10,
+        20,
+        15,
       ),
+      child: headerContent,
     );
   }
 }
