@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:palette_generator/palette_generator.dart';
-import 'package:sunkiss/models/content.dart';
-import 'package:sunkiss/commons/variables.dart';
-import 'package:sunkiss/widgets/reactionBar.dart';
+import 'package:Sunkiss/models/content.dart';
+import 'package:Sunkiss/commons/variables.dart';
+import 'package:Sunkiss/widgets/reactionBar.dart';
 
 class BigContentCon extends StatefulWidget {
+  final int ref;
   final Content content;
-  const BigContentCon({Key? key, required Content this.content})
-      : super(key: key);
+  BigContentCon({Key? key, required this.content})
+      : ref = content.id,
+        super(key: key);
 
   @override
   State<BigContentCon> createState() => _BigContentConState();
@@ -52,8 +54,8 @@ class _BigContentConState extends State<BigContentCon> {
             borderRadius: BorderRadius.circular(7),
             child: Image.asset(
               widget.content.thumbnailUrl,
-              width: 80,
-              height: 140,
+              width: 100,
+              height: 175,
               fit: BoxFit.cover,
             ),
           ),
@@ -66,7 +68,7 @@ class _BigContentConState extends State<BigContentCon> {
                   Text(
                     widget.content.title,
                     style: TextStyle(
-                      fontSize: 17,
+                      fontSize: 21.5,
                       fontWeight: FontWeight.bold,
                       color: local_colors["onSurface"],
                     ),
@@ -78,7 +80,7 @@ class _BigContentConState extends State<BigContentCon> {
                     child: Text(
                       widget.content.summary,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 16,
                         color: local_colors["onSurface"],
                       ),
                       softWrap: true,
@@ -90,44 +92,10 @@ class _BigContentConState extends State<BigContentCon> {
                     endIndent: 40,
                   ),
                   ReactionBar(
+                    ref: widget.ref,
                     rate: widget.content.rate,
                     saved: widget.content.saved,
                   ),
-                  // Row(
-                  //   children: [
-                  //     Icon(
-                  //       Icons.star_border,
-                  //       color: local_colors["onSurface"],
-                  //       size: 18,
-                  //     ),
-                  //     const SizedBox(
-                  //       width: 5,
-                  //     ),
-                  //     Icon(
-                  //       Icons.star_border,
-                  //       color: local_colors["onSurface"],
-                  //       size: 18,
-                  //     ),
-                  //     const SizedBox(
-                  //       width: 5,
-                  //     ),
-                  //     Icon(
-                  //       Icons.star_border,
-                  //       color: local_colors["onSurface"],
-                  //       size: 18,
-                  //     ),
-                  //     Expanded(
-                  //       child: Row(),
-                  //     ),
-                  //     Icon(
-                  //       widget.content.saved
-                  //         ? Icons.bookmark
-                  //         : Icons.bookmark_border_outlined,
-                  //       color: local_colors["onSurface"],
-                  //       size: 18,
-                  //     )
-                  //   ],
-                  // )
                 ],
               ),
             ),

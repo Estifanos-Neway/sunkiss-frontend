@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sunkiss/commons/variables.dart';
+import 'package:Sunkiss/commons/variables.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
   int nonUsableWidth = 55;
@@ -10,6 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
   CustomAppBar({Key? key, this.child = const SizedBox()}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    double topPadding = 12 + MediaQuery.of(context).viewPadding.top;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints viewportConstraints) =>
           PreferredSize(
@@ -26,7 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
               ),
             ],
           ),
-          padding: const EdgeInsets.fromLTRB(10, 8, 25, 8),
+          padding: EdgeInsets.fromLTRB(10, topPadding, 25, 12),
           child: Row(
             children: [
               Container(

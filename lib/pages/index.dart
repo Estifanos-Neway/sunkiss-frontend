@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sunkiss/commons/variables.dart';
-import 'package:sunkiss/pages/home.dart';
-import 'package:sunkiss/pages/profile.dart';
-import 'package:sunkiss/pages/saved.dart';
-import 'package:sunkiss/pages/search.dart';
-import 'package:sunkiss/pages/settings.dart';
-import 'package:sunkiss/widgets/custom-app-bar.dart';
+import 'package:Sunkiss/commons/variables.dart';
+import 'package:Sunkiss/pages/home.dart';
+import 'package:Sunkiss/pages/saved.dart';
+import 'package:Sunkiss/pages/search.dart';
+import 'package:Sunkiss/pages/account.dart';
+import 'package:Sunkiss/widgets/custom-app-bar.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -20,7 +19,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
     Home(),
     Saved(),
     const Search(),
-    const Settings(),
+    const Account(),
   ];
 
   @override
@@ -62,7 +61,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                   style: TextStyle(
                       color: local_colors["onBackground"],
                       fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                      fontSize: 30),
                 ),
               ),
               GestureDetector(
@@ -77,7 +76,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                   foregroundImage: const AssetImage(
                     "assets/images/dog.jpg",
                   ),
-                  radius: 10,
+                  radius: 15,
                 ),
               )
             ],
@@ -127,7 +126,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                 size: 28,
               ),
               Icon(
-                Icons.settings,
+                Icons.person,
               ),
             ],
           ),

@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:sunkiss/commons/variables.dart';
-import 'package:sunkiss/models/content.dart';
-import 'package:sunkiss/widgets/big-content-con.dart';
+import 'package:Sunkiss/commons/variables.dart';
+import 'package:Sunkiss/models/content.dart';
+import 'package:Sunkiss/widgets/big-content-con.dart';
 
 class TodaysSuggestion extends StatefulWidget {
   final List<BigContentCon> todaysSuggestionConList;
@@ -26,6 +26,7 @@ class _TodaysSuggestionState extends State<TodaysSuggestion> {
         Text(
           "Today's Suggestions",
           style: TextStyle(
+            fontSize: 20,
             color: local_colors["onBackground"],
           ),
         ),
@@ -34,7 +35,8 @@ class _TodaysSuggestionState extends State<TodaysSuggestion> {
           child: CarouselSlider(
             carouselController: widget._carouselController,
             options: CarouselOptions(
-              height: 160.0,
+              enableInfiniteScroll: widget.todaysSuggestionConList.length>1,
+              height: 195.0,
               enlargeCenterPage: true,
               onPageChanged: (index, reason) {
                 setState(() {
@@ -62,6 +64,7 @@ class _TodaysSuggestionState extends State<TodaysSuggestion> {
                       },
                       child: Icon(
                         Icons.minimize,
+                        size: 30,
                         color: index == _currentIndex
                             ? local_colors["primary"]
                             : local_colors["onBackground"],

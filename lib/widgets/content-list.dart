@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sunkiss/models/content.dart';
-import 'package:sunkiss/widgets/small-content-con.dart';
+import 'package:Sunkiss/models/content.dart';
+import 'package:Sunkiss/widgets/small-content-con.dart';
 
 class ContentList extends StatefulWidget {
-  final List<Map<String, dynamic>> contentsList;
+  final List<Content> contentsList;
   final int rowSize;
   const ContentList(
       {Key? key, required this.contentsList, required this.rowSize})
@@ -19,13 +19,14 @@ class _ContentListState extends State<ContentList> {
     return ListView.builder(
       padding: const EdgeInsets.all(0),
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: (widget.contentsList.length / widget.rowSize).ceil(),
-      itemBuilder: (BuildContext context, index) {
-        index = index * widget.rowSize;
+      itemBuilder: (BuildContext context, rowIndex) {
+        int firstContentIndex = rowIndex * widget.rowSize;
         List<Content> contentRow = [];
         for (int counter = 0; counter < widget.rowSize; counter++) {
-          if (index < widget.contentsList.length) {
-            contentRow.add(Content.fromJson(widget.contentsList[index++]));
+          if (firstContentIndex+counter < widget.contentsList.length) {
+            contentRow.add(widget.contentsList[firstContentIndex+counter]);
           }
         }
         return Container(
@@ -34,10 +35,10 @@ class _ContentListState extends State<ContentList> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
               contentRow.length,
-              (index) => Container(
+              (inRowIndex) => Container(
                 margin: const EdgeInsets.symmetric(horizontal: 15),
                 child: SmallContentCon(
-                  content: contentRow[index],
+                  content: contentRow[inRowIndex],
                 ),
               ),
             ),

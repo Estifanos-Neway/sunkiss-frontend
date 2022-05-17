@@ -1,10 +1,22 @@
+import 'package:Sunkiss/commons/variables.dart';
+import 'package:Sunkiss/states/app-state.dart';
+import 'package:Sunkiss/states/blocs/bloc-provider.dart';
+import 'package:Sunkiss/states/blocs/content-bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:sunkiss/pages/about.dart';
-import 'package:sunkiss/pages/index.dart';
-import 'package:sunkiss/pages/profile.dart';
+import 'package:Sunkiss/pages/about.dart';
+import 'package:Sunkiss/pages/index.dart';
+import 'package:Sunkiss/pages/profile.dart';
 
 void main(List<String> args) {
-  runApp(const App());
+  BlocProvider blocProvider = BlocProvider(
+    contentBloc: ContentBloc(),
+  );
+  runApp(
+    AppStateController(
+      blocProvider: blocProvider,
+      child: const App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
@@ -14,7 +26,9 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: "Sunkiss",
       debugShowCheckedModeBanner: false,
-      // home: const Index(),
+      theme: ThemeData(
+        primaryColor: local_colors["background"],
+      ),
       initialRoute: "/",
       routes: {
         "/": (BuildContext context) => const Index(),

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:palette_generator/palette_generator.dart';
-import 'package:sunkiss/commons/variables.dart';
-import 'package:sunkiss/models/content.dart';
-import 'package:sunkiss/widgets/reactionBar.dart';
+import 'package:Sunkiss/commons/variables.dart';
+import 'package:Sunkiss/models/content.dart';
+import 'package:Sunkiss/widgets/reactionBar.dart';
 
 class SmallContentCon extends StatefulWidget {
+  final int ref;
   final Content content;
-  const SmallContentCon({Key? key, required this.content}) : super(key: key);
+  SmallContentCon({Key? key, required this.content})
+      : ref=content.id, super(key: key);
   @override
   State<SmallContentCon> createState() => _SmallContentConState();
 }
@@ -48,8 +50,8 @@ class _SmallContentConState extends State<SmallContentCon> {
                 borderRadius: BorderRadius.circular(7),
                 child: Image.asset(
                   widget.content.thumbnailUrl,
-                  width: 100,
-                  height: 100,
+                  width: 130,
+                  height: 130,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -58,12 +60,12 @@ class _SmallContentConState extends State<SmallContentCon> {
                   0,
                   5,
                   0,
-                  10,
+                  17,
                 ),
                 child: Text(
                   widget.content.title,
                   style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 18,
                     color: local_colors["onSurface"],
                   ),
                 ),
@@ -76,11 +78,12 @@ class _SmallContentConState extends State<SmallContentCon> {
                       color: local_colors["primary"],
                     ),
                     child: const SizedBox(
-                      width: 80,
+                      width: 110,
                       height: 1,
                     ),
                   ),
                   ReactionBar(
+                    ref: widget.content.id,
                     rate: widget.content.rate,
                     saved: widget.content.saved,
                   ),
